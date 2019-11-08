@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>musicH5</title>
+    <link rel="stylesheet" href="https://cdn.suoluomei.com/common/js2.0/npm/vant@2.2/lib/index.css">
+</head>
+<style>
+    .box {
+        position: relative;
+    }
+
+    .van-swipe {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .music {
+        position: absolute;
+        top: 3%;
+        right: 5%;
+        width: 30px;
+        z-index: 5;
+    }
+
+    .imgrotate {
+        animation: rotate 15s linear infinite;
+        transform: rotate(360deg);
+
+    }
+
+    @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+
+    }
+
+    .suspend {
+        animation-play-state: paused
+    }
+
+    .arrow {
+        position: absolute;
+        bottom: 2%;
+        left: 50%;
+        width: 20px;
+        transform: translate(-50%);
+        animation-name: beat;
+        animation-duration: 2s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-play-state: running;
+    }
+
+    @keyframes beat {
+        0% {
+            bottom: 2%;
+        }
+
+        25% {
+            bottom: 4%;
+        }
+
+        50% {
+            bottom: 2%;
+        }
+
+        75% {
+            bottom: 4%;
+        }
+
+        100% {
+            bottom: 2%;
+        }
+    }
+</style>
+
+<body>
+    <div id="vue">
+        <div class="box">
+            <van-swipe vertical indicator-color="#f2be45">
+                <van-swipe-item v-for="(item,index) in swiper_list" :key='index'>
+                    <img :src="item.imgurl" />
+                </van-swipe-item>
+            </van-swipe>
+            <!-- 音频 -->
+            <audio id="myaudio" controls="controls" autoplay="autoplay" loop="loop" hidden
+                src="https://sucai.suoluomei.cn/sucai_zs/video/20191106172238-xiaoguojiang.mp3">
+            </audio>
+            <!-- 音乐图标 -->
+            <div class="music" id="note">
+                <img src="https://sucai.suoluomei.cn/sucai_zs/images/20191107100328-yy.png" alt="">
+            </div>
+            <!-- 箭头图标 -->
+            <div class="arrow">
+                <img src="https://sucai.suoluomei.cn/sucai_zs/images/20191107114906-sjt.png" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+<script src="http://cdn.suoluomei.com/common/js2.0/vue/v2.5.16/vue.js"></script>
+<script src="https://cdn.suoluomei.com/common/js2.0/npm/vant@2.2/lib/vant.min.js"></script>
+<script src="http://cdn.suoluomei.com/common/js/jquery-2.1.4.min.js "></script>
+<script>
+    new Vue({
+        el: '#vue',
+        data: {
+            swiper_list: [
+                { imgurl: "https://i1.fuimg.com/694774/fc6a87a67da322b5.jpg" },
+                { imgurl: "https://i1.fuimg.com/694774/bf97e8fbebcc7afe.jpg" },
+                { imgurl: "https://i1.fuimg.com/694774/dbbac0b9f4583a22.jpg" },
+                { imgurl: "https://i1.fuimg.com/694774/07d4844978a80649.jpg" }
+            ]
+        },
+        methods: {
+
+        }
+    })
+
+</script>
+<script>
+    $('.music').addClass("imgrotate")
+    var note = document.getElementById('note');
+    var audio = document.getElementById('myaudio');
+    var tag = true;
+    note.onclick = function () {
+        if (tag) {
+            audio.pause();
+            $('.music').addClass("suspend")
+            tag = false;
+        } else {
+            audio.play();
+            $('.music').removeClass("suspend")
+            $('.music').addClass("imgrotate")
+            tag = true;
+        }
+    }
+</script>
+
+</html>
