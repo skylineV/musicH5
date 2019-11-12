@@ -133,9 +133,11 @@
 
 </script>
 <script>
-    $('.music').addClass("imgrotate")
     var note = document.getElementById('note');
     var audio = document.getElementById('myaudio');
+     if(audio.play()){
+         $('.music').addClass("imgrotate")
+      }
     var tag = true;
     note.onclick = function () {
         if (tag) {
