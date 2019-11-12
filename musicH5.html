@@ -98,7 +98,7 @@
                 </van-swipe-item>
             </van-swipe>
             <!-- 音频 -->
-            <audio id="myaudio" controls="controls" autoplay="autoplay" loop="loop" hidden
+            <audio id="myaudio" controls autoplay loop hidden
                 src="https://sucai.suoluomei.cn/sucai_zs/video/20191106172238-xiaoguojiang.mp3">
             </audio>
             <!-- 音乐图标 -->
@@ -135,9 +135,7 @@
 <script>
     var note = document.getElementById('note');
     var audio = document.getElementById('myaudio');
-     if(audio.play()){
-         $('.music').addClass("imgrotate")
-      }
+    $('.music').addClass("imgrotate")
     var tag = true;
     note.onclick = function () {
         if (tag) {
